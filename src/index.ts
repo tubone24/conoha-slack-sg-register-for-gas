@@ -14,8 +14,17 @@ global.doPost = (e: DoPostEvent) => {
   const CONOHA_NETWORK_ENDPOINT: string = PropertiesService.getScriptProperties().getProperty(
     'CONOHA_NETWORK_ENDPOINT'
   );
-  const CONOHA_API_TOKEN: string = PropertiesService.getScriptProperties().getProperty(
-    'CONOHA_API_TOKEN'
+  const CONOHA_USERNAME: string = PropertiesService.getScriptProperties().getProperty(
+    'CONOHA_USERNAME'
+  );
+  const CONOHA_PASSWORD: string = PropertiesService.getScriptProperties().getProperty(
+    'CONOHA_PASSWORD'
+  );
+  const CONOHA_IDENTITY_ENDPOINT: string = PropertiesService.getScriptProperties().getProperty(
+    'CONOHA_IDENTITY_ENDPOINT'
+  );
+  const CONOHA_TENANTID: string = PropertiesService.getScriptProperties().getProperty(
+    'CONOHA_TENANTID'
   );
   const CONOHA_TARGET_SG: string = PropertiesService.getScriptProperties().getProperty(
     'CONOHA_TARGET_SG'
@@ -31,8 +40,20 @@ global.doPost = (e: DoPostEvent) => {
     return response.createResponseText('Invalid Token or Channel!');
   }
 
+  if (Utils.usageCommand(params.text)) {
+    return response.createResponseText(
+      '```\nRegist your IP for your conoHa Server SecurityGroup\n\nusage: ' +
+        '\n/ipregister showall\nShow all rules in target SecurityGroup\n\n' +
+        '/ipregister revokeall\nRevoke All ingress Rules in target SecurityGroup\n\n' +
+        '/ipregister 192.168.0.1\nRegist your IP for target SecurityGroup(format IPv4)```'
+    );
+  }
+
   const conohaService = new ConoHaService(
-    CONOHA_API_TOKEN,
+    CONOHA_USERNAME,
+    CONOHA_PASSWORD,
+    CONOHA_TENANTID,
+    CONOHA_IDENTITY_ENDPOINT,
     CONOHA_NETWORK_ENDPOINT,
     CONOHA_TARGET_SG
   );

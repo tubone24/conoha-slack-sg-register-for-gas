@@ -11,6 +11,10 @@ export class Utils {
     return str == 'showall';
   };
 
+  static usageCommand = (str: string): boolean => {
+    return str == 'help';
+  };
+
   static prettyJSON(json): string {
     return JSON.stringify(json, null, 4);
   }

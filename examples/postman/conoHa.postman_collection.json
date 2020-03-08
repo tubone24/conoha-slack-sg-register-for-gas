@@ -1,0 +1,1059 @@
+{
+	"info": {
+		"_postman_id": "698992bf-36f0-4172-bfc4-7a20fcc724f1",
+		"name": "conoHa",
+		"description": "https://www.conoha.jp/docs/",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "バージョン情報取得 - Identity API v2.0",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{identityService}}/v2.0",
+					"protocol": "https",
+					"host": [
+						"{{identityService}}"
+					],
+					"path": [
+						"v2.0"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "バージョン情報取得 - Identity API v2.0",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{identityService}}/v2.0",
+							"protocol": "https",
+							"host": [
+								"{{identityService}}"
+							],
+							"path": [
+								"v2.0"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.7.10.1"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 08 Mar 2020 09:15:43 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "310"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"version\": {\n        \"status\": \"stable\",\n        \"updated\": \"2015-05-12T09:00:00Z\",\n        \"media-types\": [\n            {\n                \"base\": \"application/json\"\n            },\n            {\n                \"base\": \"application/xml\"\n            }\n        ],\n        \"id\": \"v2.0\",\n        \"links\": [\n            {\n                \"href\": \"https://identity.tyo1.conoha.io/v2.0/\",\n                \"rel\": \"self\"\n            },\n            {\n                \"href\": \"https://www.conoha.jp/docs/\",\n                \"type\": \"text/html\",\n                \"rel\": \"describedby\"\n            }\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Token発行",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "01becc76-5053-4bfd-aa5c-373d1a48c167",
+						"exec": [
+							"pm.test(\"getAccessToken\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    if (jsonData.access.token.id) {",
+							"        var accessToken = jsonData.access.token.id;",
+							"        pm.environment.set(\"accessToken\", accessToken);",
+							"    }",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"auth\": {\r\n    \"passwordCredentials\": {\r\n      \"username\": \"{{username}}\",\r\n      \"password\": \"{{password}}\"\r\n    },\r\n    \"tenantId\": \"{{tenantId}}\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{identityService}}/v2.0/tokens",
+					"protocol": "https",
+					"host": [
+						"{{identityService}}"
+					],
+					"path": [
+						"v2.0",
+						"tokens"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Token発行",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"auth\": {\r\n    \"passwordCredentials\": {\r\n      \"username\": \"{{username}}\",\r\n      \"password\": \"{{password}}\"\r\n    },\r\n    \"tenantId\": \"{{tenantId}}\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{identityService}}/v2.0/tokens",
+							"protocol": "https",
+							"host": [
+								"{{identityService}}"
+							],
+							"path": [
+								"v2.0",
+								"tokens"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.7.10.1"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 08 Mar 2020 03:38:26 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2397"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"access\": {\n        \"token\": {\n            \"issued_at\": \"2020-03-08T03:38:26.360456\",\n            \"expires\": \"2020-03-09T03:38:26Z\",\n            \"id\": \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n            \"tenant\": {\n                \"domain_id\": \"gnc\",\n                \"description\": \"\",\n                \"enabled\": true,\n                \"id\": \"xxxxxxxxxxxxxxxxxxxxxx\",\n                \"name\": \"gnctxxxxxxxxx\"\n            },\n            \"audit_ids\": [\n                \"Xhxxxxxxx\"\n            ]\n        },\n        \"serviceCatalog\": [\n            {\n                \"endpoints\": [\n                    {\n                        \"region\": \"tyo1\",\n                        \"publicURL\": \"https://account.tyo1.conoha.io/v1/xxxxxxxxxxxxxxxxxxxxxx\"\n                    }\n                ],\n                \"endpoints_links\": [],\n                \"type\": \"account\",\n                \"name\": \"Account Service\"\n            },\n            {\n                \"endpoints\": [\n                    {\n                        \"region\": \"tyo1\",\n                        \"publicURL\": \"https://compute.tyo1.conoha.io/v2/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"\n                    }\n                ],\n                \"endpoints_links\": [],\n                \"type\": \"compute\",\n                \"name\": \"Compute Service\"\n            },\n            {\n                \"endpoints\": [\n                    {\n                        \"region\": \"tyo1\",\n                        \"publicURL\": \"https://networking.tyo1.conoha.io\"\n                    }\n                ],\n                \"endpoints_links\": [],\n                \"type\": \"network\",\n                \"name\": \"Network Service\"\n            },\n            {\n                \"endpoints\": [\n                    {\n                        \"region\": \"tyo1\",\n                        \"publicURL\": \"https://block-storage.tyo1.conoha.io/v2/xxxxxxxxxxxxxxxxxxxxxxxxxx\"\n                    }\n                ],\n                \"endpoints_links\": [],\n                \"type\": \"volumev2\",\n                \"name\": \"Volume Service\"\n            },\n            {\n                \"endpoints\": [\n                    {\n                        \"region\": \"tyo1\"\n                    }\n                ],\n                \"endpoints_links\": [],\n                \"type\": \"waf\",\n                \"name\": \"WAF Service\"\n            },\n            {\n                \"endpoints\": [\n                    {\n                        \"region\": \"tyo1\",\n                        \"publicURL\": \"https://image-service.tyo1.conoha.io\"\n                    }\n                ],\n                \"endpoints_links\": [],\n                \"type\": \"image\",\n                \"name\": \"Image Service\"\n            },\n            {\n                \"endpoints\": [\n                    {\n                        \"region\": \"tyo1\",\n                        \"publicURL\": \"https://database-hosting.tyo1.conoha.io/v1\"\n                    }\n                ],\n                \"endpoints_links\": [],\n                \"type\": \"databasehosting\",\n                \"name\": \"Database Hosting Service\"\n            },\n            {\n                \"endpoints\": [\n                    {\n                        \"region\": \"tyo1\",\n                        \"publicURL\": \"https://mail-hosting.tyo1.conoha.io/v1\"\n                    }\n                ],\n                \"endpoints_links\": [],\n                \"type\": \"mailhosting\",\n                \"name\": \"Mail Hosting Service\"\n            },\n            {\n                \"endpoints\": [\n                    {\n                        \"region\": \"tyo1\",\n                        \"publicURL\": \"https://dns-service.tyo1.conoha.io\"\n                    }\n                ],\n                \"endpoints_links\": [],\n                \"type\": \"dns\",\n                \"name\": \"DNS Service\"\n            },\n            {\n                \"endpoints\": [\n                    {\n                        \"region\": \"tyo1\",\n                        \"publicURL\": \"https://object-storage.tyo1.conoha.io/v1/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"\n                    }\n                ],\n                \"endpoints_links\": [],\n                \"type\": \"object-store\",\n                \"name\": \"Object Storage Service\"\n            },\n            {\n                \"endpoints\": [\n                    {\n                        \"region\": \"tyo1\",\n                        \"publicURL\": \"https://identity.tyo1.conoha.io/v2.0\"\n                    },\n                    {\n                        \"region\": \"sin1\",\n                        \"publicURL\": \"https://identity.sin1.conoha.io/v2.0\"\n                    }\n                ],\n                \"endpoints_links\": [],\n                \"type\": \"identity\",\n                \"name\": \"Identity Service\"\n            }\n        ],\n        \"user\": {\n            \"username\": \"gncuxxxxxxxxxx\",\n            \"roles_links\": [],\n            \"id\": \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n            \"roles\": [\n                {\n                    \"name\": \"SwiftOperator\"\n                },\n                {\n                    \"name\": \"_member_\"\n                }\n            ],\n            \"name\": \"gncuxxxxxxxxxx\"\n        },\n        \"metadata\": {\n            \"is_admin\": 0,\n            \"roles\": [\n                \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n                \"exxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"\n            ]\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "セキュリティグループ一覧取得 - Network API v2.0",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "X-Auth-Token",
+						"type": "text",
+						"value": "{{accessToken}}"
+					}
+				],
+				"url": {
+					"raw": "https://{{networkAPI}}/v2.0/security-groups",
+					"protocol": "https",
+					"host": [
+						"{{networkAPI}}"
+					],
+					"path": [
+						"v2.0",
+						"security-groups"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "セキュリティグループ一覧取得 - Network API v2.0",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Auth-Token",
+								"type": "text",
+								"value": "{{accessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://{{networkAPI}}/v2.0/security-groups",
+							"protocol": "https",
+							"host": [
+								"{{networkAPI}}"
+							],
+							"path": [
+								"v2.0",
+								"security-groups"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.7.10.1"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 08 Mar 2020 05:31:08 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"security_groups\": [\r\n        {\r\n            \"tenant_id\": \"22394afc818d471ca2f0308c06ae7460\",\r\n            \"description\": \"default\",\r\n            \"id\": \"6cdb77f5-0e85-49cf-b093-acb3ab41e730\",\r\n            \"security_group_rules\": [\r\n                {\r\n                    \"remote_group_id\": null,\r\n                    \"direction\": \"egress\",\r\n                    \"remote_ip_prefix\": null,\r\n                    \"protocol\": null,\r\n                    \"ethertype\": \"IPv6\",\r\n                    \"tenant_id\": \"22394afc818d471ca2f0308c06ae7460\",\r\n                    \"port_range_max\": null,\r\n                    \"port_range_min\": null,\r\n                    \"id\": \"2ffdf2d2-3b2a-4b3a-89a2-fb5b2a9f8811\",\r\n                    \"security_group_id\": \"6cdb77f5-0e85-49cf-b093-acb3ab41e730\"\r\n                },\r\n                {\r\n                    \"remote_group_id\": \"6cdb77f5-0e85-49cf-b093-acb3ab41e730\",\r\n                    \"direction\": \"ingress\",\r\n                    \"remote_ip_prefix\": null,\r\n                    \"protocol\": null,\r\n                    \"ethertype\": \"IPv6\",\r\n                    \"tenant_id\": \"22394afc818d471ca2f0308c06ae7460\",\r\n                    \"port_range_max\": null,\r\n                    \"port_range_min\": null,\r\n                    \"id\": \"4117d7a3-e0ac-4f71-823a-e524d1d4ffc1\",\r\n                    \"security_group_id\": \"6cdb77f5-0e85-49cf-b093-acb3ab41e730\"\r\n                },\r\n                {\r\n                    \"remote_group_id\": \"6cdb77f5-0e85-49cf-b093-acb3ab41e730\",\r\n                    \"direction\": \"ingress\",\r\n                    \"remote_ip_prefix\": null,\r\n                    \"protocol\": null,\r\n                    \"ethertype\": \"IPv4\",\r\n                    \"tenant_id\": \"22394afc818d471ca2f0308c06ae7460\",\r\n                    \"port_range_max\": null,\r\n                    \"port_range_min\": null,\r\n                    \"id\": \"8238b994-abea-42e6-b872-be475d5b306e\",\r\n                    \"security_group_id\": \"6cdb77f5-0e85-49cf-b093-acb3ab41e730\"\r\n                },\r\n                {\r\n                    \"remote_group_id\": null,\r\n                    \"direction\": \"egress\",\r\n                    \"remote_ip_prefix\": null,\r\n                    \"protocol\": null,\r\n                    \"ethertype\": \"IPv4\",\r\n                    \"tenant_id\": \"22394afc818d471ca2f0308c06ae7460\",\r\n                    \"port_range_max\": null,\r\n                    \"port_range_min\": null,\r\n                    \"id\": \"c79e56f0-d180-499c-bb4a-f6cd6f155eb7\",\r\n                    \"security_group_id\": \"6cdb77f5-0e85-49cf-b093-acb3ab41e730\"\r\n                }\r\n            ],\r\n            \"name\": \"default\"\r\n        },\r\n        {\r\n            \"tenant_id\": \"22394afc818d471ca2f0308c06ae7460\",\r\n            \"description\": \"gncs-ipv4-ssh\",\r\n            \"id\": \"bda5122c-81bc-4dc5-b353-2d349c3e2063\",\r\n            \"security_group_rules\": [\r\n                {\r\n                    \"remote_group_id\": null,\r\n                    \"direction\": \"egress\",\r\n                    \"remote_ip_prefix\": null,\r\n                    \"protocol\": null,\r\n                    \"ethertype\": \"IPv6\",\r\n                    \"tenant_id\": \"22394afc818d471ca2f0308c06ae7460\",\r\n                    \"port_range_max\": null,\r\n                    \"port_range_min\": null,\r\n                    \"id\": \"87cc8101-9798-4e91-a0fd-a3fd3e25dae0\",\r\n                    \"security_group_id\": \"bda5122c-81bc-4dc5-b353-2d349c3e2063\"\r\n                },\r\n                {\r\n                    \"remote_group_id\": null,\r\n                    \"direction\": \"egress\",\r\n                    \"remote_ip_prefix\": null,\r\n                    \"protocol\": null,\r\n                    \"ethertype\": \"IPv4\",\r\n                    \"tenant_id\": \"22394afc818d471ca2f0308c06ae7460\",\r\n                    \"port_range_max\": null,\r\n                    \"port_range_min\": null,\r\n                    \"id\": \"c291e64a-e450-454a-89ae-5ee6e5b62717\",\r\n                    \"security_group_id\": \"bda5122c-81bc-4dc5-b353-2d349c3e2063\"\r\n                },\r\n                {\r\n                    \"remote_group_id\": null,\r\n                    \"direction\": \"ingress\",\r\n                    \"remote_ip_prefix\": null,\r\n                    \"protocol\": \"tcp\",\r\n                    \"ethertype\": \"IPv4\",\r\n                    \"tenant_id\": \"22394afc818d471ca2f0308c06ae7460\",\r\n                    \"port_range_max\": 22,\r\n                    \"port_range_min\": 22,\r\n                    \"id\": \"c3cfce5b-ae1f-4579-8a45-d323bb281069\",\r\n                    \"security_group_id\": \"bda5122c-81bc-4dc5-b353-2d349c3e2063\"\r\n                }\r\n            ],\r\n            \"name\": \"gncs-ipv4-ssh\"\r\n        }\r\n    ]\r\n}"
+				}
+			]
+		},
+		{
+			"name": "セキュリティグループ詳細取得 - Network API v2.0",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "X-Auth-Token",
+						"type": "text",
+						"value": "{{accessToken}}"
+					}
+				],
+				"url": {
+					"raw": "https://{{networkAPI}}/v2.0/security-groups/{{targetSG}}",
+					"protocol": "https",
+					"host": [
+						"{{networkAPI}}"
+					],
+					"path": [
+						"v2.0",
+						"security-groups",
+						"{{targetSG}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "セキュリティグループ詳細取得 - Network API v2.0",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Auth-Token",
+								"type": "text",
+								"value": "{{accessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://{{networkAPI}}/v2.0/security-groups/{{targetSG}}",
+							"protocol": "https",
+							"host": [
+								"{{networkAPI}}"
+							],
+							"path": [
+								"v2.0",
+								"security-groups",
+								"{{targetSG}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.7.10.1"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 08 Mar 2020 09:19:20 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "501"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"security_group\": {\n        \"tenant_id\": \"27zxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n        \"description\": \"security group for HomeIPSSH\",\n        \"id\": \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n        \"security_group_rules\": [\n            {\n                \"remote_group_id\": null,\n                \"direction\": \"egress\",\n                \"remote_ip_prefix\": null,\n                \"protocol\": null,\n                \"ethertype\": \"IPv4\",\n                \"tenant_id\": \"27xxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n                \"port_range_max\": null,\n                \"port_range_min\": null,\n                \"id\": \"dxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n                \"security_group_id\": \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"\n            }\n        ],\n        \"name\": \"fixedip-ssh\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "セキュリティグループ作成 - Network API v2.0",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "X-Auth-Token",
+						"type": "text",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"security_group\": {\r\n        \"name\": \"yourSgName\",\r\n        \"description\": \"security group for xxxxxxxx\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{networkAPI}}/v2.0/security-groups",
+					"protocol": "https",
+					"host": [
+						"{{networkAPI}}"
+					],
+					"path": [
+						"v2.0",
+						"security-groups"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "セキュリティグループ作成 - Network API v2.0",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Auth-Token",
+								"type": "text",
+								"value": "{{accessToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"security_group\": {\r\n        \"name\": \"fixedip-ssh2\",\r\n        \"description\": \"security group for HomeIPSSH\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{networkAPI}}/v2.0/security-groups",
+							"protocol": "https",
+							"host": [
+								"{{networkAPI}}"
+							],
+							"path": [
+								"v2.0",
+								"security-groups"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.7.10.1"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 08 Mar 2020 09:21:50 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "801"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"security_group\": {\n        \"tenant_id\": \"27xxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n        \"description\": \"security group for HomeIPSSH\",\n        \"id\": \"8fba8xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n        \"security_group_rules\": [\n            {\n                \"remote_group_id\": null,\n                \"direction\": \"egress\",\n                \"remote_ip_prefix\": null,\n                \"protocol\": null,\n                \"ethertype\": \"IPv4\",\n                \"tenant_id\": \"272cxxxxxxxxxxxxxxxxxxxxxxxx\",\n                \"port_range_max\": null,\n                \"port_range_min\": null,\n                \"id\": \"30xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n                \"security_group_id\": \"8xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"\n            },\n            {\n                \"remote_group_id\": null,\n                \"direction\": \"egress\",\n                \"remote_ip_prefix\": null,\n                \"protocol\": null,\n                \"ethertype\": \"IPv6\",\n                \"tenant_id\": \"27xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n                \"port_range_max\": null,\n                \"port_range_min\": null,\n                \"id\": \"43xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n                \"security_group_id\": \"8xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"\n            }\n        ],\n        \"name\": \"fixedip-ssh2\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "セキュリティグループ削除 - Network API v2.0",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "X-Auth-Token",
+						"type": "text",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{networkAPI}}/v2.0/security-groups/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+					"protocol": "https",
+					"host": [
+						"{{networkAPI}}"
+					],
+					"path": [
+						"v2.0",
+						"security-groups",
+						"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "セキュリティグループ ルール一覧取得 - Network API v2.0",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "{{accessToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{networkAPI}}/v2.0/security-group-rules",
+					"protocol": "https",
+					"host": [
+						"{{networkAPI}}"
+					],
+					"path": [
+						"v2.0",
+						"security-group-rules"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "セキュリティグループ ルール一覧取得 - Network API v2.0",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{networkAPI}}/v2.0/security-group-rules",
+							"protocol": "https",
+							"host": [
+								"{{networkAPI}}"
+							],
+							"path": [
+								"v2.0",
+								"security-group-rules"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.7.10.1"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 08 Mar 2020 05:12:57 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"security_group_rules\": [\r\n        {\r\n            \"remote_group_id\": null,\r\n            \"direction\": \"ingress\",\r\n            \"remote_ip_prefix\": null,\r\n            \"protocol\": \"tcp\",\r\n            \"ethertype\": \"IPv4\",\r\n            \"tenant_id\": \"22394afc818d471ca2f0308c06ae7460\",\r\n            \"port_range_max\": 21,\r\n            \"port_range_min\": 21,\r\n            \"id\": \"1a6d4892-3bfc-43cd-9ff8-f3f57a89af23\",\r\n            \"security_group_id\": \"0b996a5e-c759-4850-b728-aa3324bde9dc\"\r\n        },\r\n        {\r\n            \"remote_group_id\": null,\r\n            \"direction\": \"ingress\",\r\n            \"remote_ip_prefix\": null,\r\n            \"protocol\": null,\r\n            \"ethertype\": \"IPv6\",\r\n            \"tenant_id\": \"22394afc818d471ca2f0308c06ae7460\",\r\n            \"port_range_max\": null,\r\n            \"port_range_min\": null,\r\n            \"id\": \"1c33f1ad-c2e4-47c2-9f00-414f3742fe63\",\r\n            \"security_group_id\": \"4cb278af-80b9-4e81-9f70-b4407d826286\"\r\n        },\r\n        {\r\n            \"remote_group_id\": null,\r\n            \"direction\": \"ingress\",\r\n            \"remote_ip_prefix\": null,\r\n            \"protocol\": null,\r\n            \"ethertype\": \"IPv4\",\r\n            \"tenant_id\": \"22394afc818d471ca2f0308c06ae7460\",\r\n            \"port_range_max\": null,\r\n            \"port_range_min\": null,\r\n            \"id\": \"276247d2-80f2-4d88-90da-c3c36ef865d6\",\r\n            \"security_group_id\": \"32e49620-88d5-4dec-9318-a70a5ed544be\"\r\n        },\r\n        {\r\n            \"remote_group_id\": null,\r\n            \"direction\": \"egress\",\r\n            \"remote_ip_prefix\": null,\r\n            \"protocol\": null,\r\n            \"ethertype\": \"IPv6\",\r\n            \"tenant_id\": \"22394afc818d471ca2f0308c06ae7460\",\r\n            \"port_range_max\": null,\r\n            \"port_range_min\": null,\r\n            \"id\": \"289304be-e42a-4de2-ad3d-ae653b1dfb7b\",\r\n            \"security_group_id\": \"32e49620-88d5-4dec-9318-a70a5ed544be\"\r\n        },\r\n        {\r\n            \"remote_group_id\": null,\r\n            \"direction\": \"egress\",\r\n            \"remote_ip_prefix\": null,\r\n            \"protocol\": null,\r\n            \"ethertype\": \"IPv6\",\r\n            \"tenant_id\": \"22394afc818d471ca2f0308c06ae7460\",\r\n            \"port_range_max\": null,\r\n            \"port_range_min\": null,\r\n            \"id\": \"2ffdf2d2-3b2a-4b3a-89a2-fb5b2a9f8811\",\r\n            \"security_group_id\": \"6cdb77f5-0e85-49cf-b093-acb3ab41e730\"\r\n        },\r\n        {\r\n            \"remote_group_id\": \"6cdb77f5-0e85-49cf-b093-acb3ab41e730\",\r\n            \"direction\": \"ingress\",\r\n            \"remote_ip_prefix\": null,\r\n            \"protocol\": null,\r\n            \"ethertype\": \"IPv6\",\r\n            \"tenant_id\": \"22394afc818d471ca2f0308c06ae7460\",\r\n            \"port_range_max\": null,\r\n            \"port_range_min\": null,\r\n            \"id\": \"4117d7a3-e0ac-4f71-823a-e524d1d4ffc1\",\r\n            \"security_group_id\": \"6cdb77f5-0e85-49cf-b093-acb3ab41e730\"\r\n        },\r\n        {\r\n            \"remote_group_id\": null,\r\n            \"direction\": \"egress\",\r\n            \"remote_ip_prefix\": null,\r\n            \"protocol\": null,\r\n            \"ethertype\": \"IPv6\",\r\n            \"tenant_id\": \"22394afc818d471ca2f0308c06ae7460\",\r\n            \"port_range_max\": null,\r\n            \"port_range_min\": null,\r\n            \"id\": \"5ae49198-c2a1-4fe1-8676-46fbab478894\",\r\n            \"security_group_id\": \"0b996a5e-c759-4850-b728-aa3324bde9dc\"\r\n        },\r\n        {\r\n            \"remote_group_id\": null,\r\n            \"direction\": \"ingress\",\r\n            \"remote_ip_prefix\": null,\r\n            \"protocol\": \"tcp\",\r\n            \"ethertype\": \"IPv4\",\r\n            \"tenant_id\": \"22394afc818d471ca2f0308c06ae7460\",\r\n            \"port_range_max\": 443,\r\n            \"port_range_min\": 443,\r\n            \"id\": \"667f495e-60b5-41c5-844c-bc65decf7546\",\r\n            \"security_group_id\": \"0b996a5e-c759-4850-b728-aa3324bde9dc\"\r\n        },\r\n        {\r\n            \"remote_group_id\": null,\r\n            \"direction\": \"ingress\",\r\n            \"remote_ip_prefix\": null,\r\n            \"protocol\": \"tcp\",\r\n            \"ethertype\": \"IPv4\",\r\n            \"tenant_id\": \"22394afc818d471ca2f0308c06ae7460\",\r\n            \"port_range_max\": 80,\r\n            \"port_range_min\": 80,\r\n            \"id\": \"6a06a7c2-1931-41df-8cde-a3c7415f2dce\",\r\n            \"security_group_id\": \"0b996a5e-c759-4850-b728-aa3324bde9dc\"\r\n        },\r\n        {\r\n            \"remote_group_id\": \"6cdb77f5-0e85-49cf-b093-acb3ab41e730\",\r\n            \"direction\": \"ingress\",\r\n            \"remote_ip_prefix\": null,\r\n            \"protocol\": null,\r\n            \"ethertype\": \"IPv4\",\r\n            \"tenant_id\": \"22394afc818d471ca2f0308c06ae7460\",\r\n            \"port_range_max\": null,\r\n            \"port_range_min\": null,\r\n            \"id\": \"8238b994-abea-42e6-b872-be475d5b306e\",\r\n            \"security_group_id\": \"6cdb77f5-0e85-49cf-b093-acb3ab41e730\"\r\n        },\r\n        {\r\n            \"remote_group_id\": null,\r\n            \"direction\": \"egress\",\r\n            \"remote_ip_prefix\": null,\r\n            \"protocol\": null,\r\n            \"ethertype\": \"IPv6\",\r\n            \"tenant_id\": \"22394afc818d471ca2f0308c06ae7460\",\r\n            \"port_range_max\": null,\r\n            \"port_range_min\": null,\r\n            \"id\": \"87cc8101-9798-4e91-a0fd-a3fd3e25dae0\",\r\n            \"security_group_id\": \"bda5122c-81bc-4dc5-b353-2d349c3e2063\"\r\n        },\r\n        {\r\n            \"remote_group_id\": null,\r\n            \"direction\": \"egress\",\r\n            \"remote_ip_prefix\": null,\r\n            \"protocol\": null,\r\n            \"ethertype\": \"IPv4\",\r\n            \"tenant_id\": \"22394afc818d471ca2f0308c06ae7460\",\r\n            \"port_range_max\": null,\r\n            \"port_range_min\": null,\r\n            \"id\": \"a3cc9cbe-f4dd-4010-a3c5-1843e5c9ff17\",\r\n            \"security_group_id\": \"4cb278af-80b9-4e81-9f70-b4407d826286\"\r\n        },\r\n        {\r\n            \"remote_group_id\": null,\r\n            \"direction\": \"egress\",\r\n            \"remote_ip_prefix\": null,\r\n            \"protocol\": null,\r\n            \"ethertype\": \"IPv6\",\r\n            \"tenant_id\": \"22394afc818d471ca2f0308c06ae7460\",\r\n            \"port_range_max\": null,\r\n            \"port_range_min\": null,\r\n            \"id\": \"b9c2c5ba-cb22-4c09-8d46-3d2b7e725a95\",\r\n            \"security_group_id\": \"4cb278af-80b9-4e81-9f70-b4407d826286\"\r\n        },\r\n        {\r\n            \"remote_group_id\": null,\r\n            \"direction\": \"egress\",\r\n            \"remote_ip_prefix\": null,\r\n            \"protocol\": null,\r\n            \"ethertype\": \"IPv4\",\r\n            \"tenant_id\": \"22394afc818d471ca2f0308c06ae7460\",\r\n            \"port_range_max\": null,\r\n            \"port_range_min\": null,\r\n            \"id\": \"c291e64a-e450-454a-89ae-5ee6e5b62717\",\r\n            \"security_group_id\": \"bda5122c-81bc-4dc5-b353-2d349c3e2063\"\r\n        },\r\n        {\r\n            \"remote_group_id\": null,\r\n            \"direction\": \"ingress\",\r\n            \"remote_ip_prefix\": null,\r\n            \"protocol\": \"tcp\",\r\n            \"ethertype\": \"IPv4\",\r\n            \"tenant_id\": \"22394afc818d471ca2f0308c06ae7460\",\r\n            \"port_range_max\": 22,\r\n            \"port_range_min\": 22,\r\n            \"id\": \"c3cfce5b-ae1f-4579-8a45-d323bb281069\",\r\n            \"security_group_id\": \"bda5122c-81bc-4dc5-b353-2d349c3e2063\"\r\n        },\r\n        {\r\n            \"remote_group_id\": null,\r\n            \"direction\": \"egress\",\r\n            \"remote_ip_prefix\": null,\r\n            \"protocol\": null,\r\n            \"ethertype\": \"IPv4\",\r\n            \"tenant_id\": \"22394afc818d471ca2f0308c06ae7460\",\r\n            \"port_range_max\": null,\r\n            \"port_range_min\": null,\r\n            \"id\": \"c79e56f0-d180-499c-bb4a-f6cd6f155eb7\",\r\n            \"security_group_id\": \"6cdb77f5-0e85-49cf-b093-acb3ab41e730\"\r\n        },\r\n        {\r\n            \"remote_group_id\": null,\r\n            \"direction\": \"egress\",\r\n            \"remote_ip_prefix\": null,\r\n            \"protocol\": null,\r\n            \"ethertype\": \"IPv4\",\r\n            \"tenant_id\": \"22394afc818d471ca2f0308c06ae7460\",\r\n            \"port_range_max\": null,\r\n            \"port_range_min\": null,\r\n            \"id\": \"db97cacc-e487-47fc-8139-628f749e3253\",\r\n            \"security_group_id\": \"32e49620-88d5-4dec-9318-a70a5ed544be\"\r\n        },\r\n        {\r\n            \"remote_group_id\": null,\r\n            \"direction\": \"ingress\",\r\n            \"remote_ip_prefix\": null,\r\n            \"protocol\": \"tcp\",\r\n            \"ethertype\": \"IPv4\",\r\n            \"tenant_id\": \"22394afc818d471ca2f0308c06ae7460\",\r\n            \"port_range_max\": 20,\r\n            \"port_range_min\": 20,\r\n            \"id\": \"dc14a4c6-f851-48ee-9819-62d18637e2de\",\r\n            \"security_group_id\": \"0b996a5e-c759-4850-b728-aa3324bde9dc\"\r\n        },\r\n        {\r\n            \"remote_group_id\": null,\r\n            \"direction\": \"egress\",\r\n            \"remote_ip_prefix\": null,\r\n            \"protocol\": null,\r\n            \"ethertype\": \"IPv4\",\r\n            \"tenant_id\": \"22394afc818d471ca2f0308c06ae7460\",\r\n            \"port_range_max\": null,\r\n            \"port_range_min\": null,\r\n            \"id\": \"dc64f144-5ce9-47f9-9cbf-06d3dc689f64\",\r\n            \"security_group_id\": \"0b996a5e-c759-4850-b728-aa3324bde9dc\"\r\n        }\r\n    ]\r\n}"
+				}
+			]
+		},
+		{
+			"name": "セキュリティグループ ルール作成 - Network API v2.0",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "X-Auth-Token",
+						"type": "text",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"security_group_rule\": {\r\n        \"direction\": \"ingress\",\r\n        \"ethertype\": \"IPv4\",\r\n        \"security_group_id\": \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxd\",\r\n        \"port_range_min\": \"22\",\r\n        \"port_range_max\": \"22\",\r\n        \"protocol\": \"tcp\",\r\n        \"remote_ip_prefix\": \"2xx.1xx.1xx.1xx/32\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{networkAPI}}/v2.0/security-group-rules",
+					"protocol": "https",
+					"host": [
+						"{{networkAPI}}"
+					],
+					"path": [
+						"v2.0",
+						"security-group-rules"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "セキュリティグループ ルール削除 - Network API v2.0",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "X-Auth-Token",
+						"type": "text",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"security_group_rule\": {\r\n        \"direction\": \"ingress\",\r\n        \"ethertype\": \"IPv4\",\r\n        \"security_group_id\": \"7fxxxxxxxxxxxxxxxxxxxxxxxxx\",\r\n        \"port_range_min\": \"22\",\r\n        \"port_range_max\": \"22\",\r\n        \"protocol\": \"tcp\",\r\n        \"remote_ip_prefix\": \"2xx.xx.xx.xx/32\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{networkAPI}}/v2.0/security-group-rules/b0aa63f2-e058-4504-83ac-9ffcfff19597",
+					"protocol": "https",
+					"host": [
+						"{{networkAPI}}"
+					],
+					"path": [
+						"v2.0",
+						"security-group-rules",
+						"b0aa63f2-e058-4504-83ac-9ffcfff19597"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ポート一覧取得 - Network API v2.0",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "X-Auth-Token",
+						"type": "text",
+						"value": "{{accessToken}}"
+					}
+				],
+				"url": {
+					"raw": "https://{{networkAPI}}/v2.0/ports",
+					"protocol": "https",
+					"host": [
+						"{{networkAPI}}"
+					],
+					"path": [
+						"v2.0",
+						"ports"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "ポート一覧取得 - Network API v2.0",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Auth-Token",
+								"type": "text",
+								"value": "{{accessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://{{networkAPI}}/v2.0/ports",
+							"protocol": "https",
+							"host": [
+								"{{networkAPI}}"
+							],
+							"path": [
+								"v2.0",
+								"ports"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.7.10.1"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 08 Mar 2020 09:30:38 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "850"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"ports\": [\r\n        {\r\n            \"status\": \"ACTIVE\",\r\n            \"name\": \"PORT_NAME\",\r\n            \"allowed_address_pairs\": [],\r\n            \"admin_state_up\": true,\r\n            \"network_id\": \"69f32dbf-392d-459a-b7d9-6802d55a6d65\",\r\n            \"tenant_id\": \"22394afc818d471ca2f0308c06ae7460\",\r\n            \"extra_dhcp_opts\": [],\r\n            \"binding:vnic_type\": \"normal\",\r\n            \"device_owner\": \"compute:None\",\r\n            \"mac_address\": \"fa:16:3e:16:69:ce\",\r\n            \"fixed_ips\": [\r\n                {\r\n                    \"subnet_id\": \"45093c6d-e0cf-4101-943b-c75625a57801\",\r\n                    \"ip_address\": \"172.21.139.80\"\r\n                }\r\n            ],\r\n            \"id\": \"08357e0f-3b36-46f4-8f75-bbdb0bfcaa33\",\r\n            \"security_groups\": [\r\n                \"6cdb77f5-0e85-49cf-b093-acb3ab41e730\"\r\n            ],\r\n            \"device_id\": \"2a0b45bb-1e14-400e-a386-195f58c47f4e\"\r\n        },\r\n        {\r\n            \"status\": \"DOWN\",\r\n            \"name\": \"PORT_NAME\",\r\n            \"allowed_address_pairs\": [],\r\n            \"admin_state_up\": true,\r\n            \"network_id\": \"a41e74fa-49ab-494e-8992-f76e68c81cf7\",\r\n            \"tenant_id\": \"22394afc818d471ca2f0308c06ae7460\",\r\n            \"extra_dhcp_opts\": [],\r\n            \"binding:vnic_type\": \"normal\",\r\n            \"device_owner\": \"neutron:LOADBALANCER\",\r\n            \"mac_address\": \"fa:16:3e:7b:95:f7\",\r\n            \"fixed_ips\": [\r\n                {\r\n                    \"subnet_id\": \"9c27f83a-ba6d-4e0e-b004-e34422e207a6\",\r\n                    \"ip_address\": \"157.7.94.1\"\r\n                }\r\n            ],\r\n            \"id\": \"f7b66ca5-4d4b-49bc-bfba-28d7f1bbc711\",\r\n            \"security_groups\": [\r\n                \"6cdb77f5-0e85-49cf-b093-acb3ab41e730\"\r\n            ],\r\n            \"device_id\": \"539ffbcf-a25d-5d5c-857c-859fe991b8ca\"\r\n        }\r\n    ]\r\n}"
+				}
+			]
+		},
+		{
+			"name": "ポート詳細取得 - Network API v2.0",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "X-Auth-Token",
+						"type": "text",
+						"value": "{{accessToken}}"
+					}
+				],
+				"url": {
+					"raw": "https://{{networkAPI}}/v2.0/ports/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+					"protocol": "https",
+					"host": [
+						"{{networkAPI}}"
+					],
+					"path": [
+						"v2.0",
+						"ports",
+						"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "ポート詳細取得 - Network API v2.0",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Auth-Token",
+								"type": "text",
+								"value": "{{accessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://{{networkAPI}}/v2.0/ports/88b56c62-d081-4155-8512-fa57edc8a225",
+							"protocol": "https",
+							"host": [
+								"{{networkAPI}}"
+							],
+							"path": [
+								"v2.0",
+								"ports",
+								"88b56c62-d081-4155-8512-fa57edc8a225"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.7.10.1"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 08 Mar 2020 09:34:06 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "847"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"port\": {\r\n        \"status\": \"ACTIVE\",\r\n        \"name\": \"PORT_NAME\",\r\n        \"allowed_address_pairs\": [],\r\n        \"admin_state_up\": true,\r\n        \"network_id\": \"69f32dbf-392d-459a-b7d9-6802d55a6d65\",\r\n        \"tenant_id\": \"22394afc818d471ca2f0308c06ae7460\",\r\n        \"extra_dhcp_opts\": [],\r\n        \"binding:vnic_type\": \"normal\",\r\n        \"device_owner\": \"compute:None\",\r\n        \"mac_address\": \"fa:16:3e:16:69:ce\",\r\n        \"fixed_ips\": [\r\n            {\r\n                \"subnet_id\": \"45093c6d-e0cf-4101-943b-c75625a57801\",\r\n                \"ip_address\": \"172.21.139.80\"\r\n            }\r\n        ],\r\n        \"id\": \"08357e0f-3b36-46f4-8f75-bbdb0bfcaa33\",\r\n        \"security_groups\": [\r\n            \"6cdb77f5-0e85-49cf-b093-acb3ab41e730\"\r\n        ],\r\n        \"device_id\": \"2a0b45bb-1e14-400e-a386-195f58c47f4e\"\r\n    }\r\n}"
+				}
+			]
+		},
+		{
+			"name": "ポート更新 - Network API v2.0",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "X-Auth-Token",
+						"type": "text",
+						"value": "{{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"port\": {\r\n        \"security_groups\": [\r\n        \t\"54xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\r\n            \"faxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\r\n            \"7fxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"\r\n        ]\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{networkAPI}}/v2.0/ports/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+					"protocol": "https",
+					"host": [
+						"{{networkAPI}}"
+					],
+					"path": [
+						"v2.0",
+						"ports",
+						"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "ポート更新 - Network API v2.0",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Auth-Token",
+								"type": "text",
+								"value": "{{accessToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"port\": {\r\n        \"security_groups\": [\r\n        \t\"54805f0e-a2cb-48c1-b846-8a5186510a19\",\r\n            \"fa6a2cc2-ef20-4d34-bc78-9ae1efb71f6d\",\r\n            \"7ff7d945-e7dc-4102-84d4-d877cd91d7cd\"\r\n        ]\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{networkAPI}}/v2.0/ports/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+							"protocol": "https",
+							"host": [
+								"{{networkAPI}}"
+							],
+							"path": [
+								"v2.0",
+								"ports",
+								"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.7.10.1"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 08 Mar 2020 09:34:57 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "105"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n    \"port\": {\r\n        \"status\": \"ACTIVE\",\r\n        \"name\": \"PORT_NAME\",\r\n        \"allowed_address_pairs\": [],\r\n        \"admin_state_up\": true,\r\n        \"network_id\": \"7d9e6cbf-9473-4e16-a501-284b59300f3f\",\r\n        \"tenant_id\": \"22394afc818d471ca2f0308c06ae7460\",\r\n        \"extra_dhcp_opts\": [],\r\n        \"binding:vnic_type\": \"normal\",\r\n        \"device_owner\": \"compute:None\",\r\n        \"mac_address\": \"fa:16:3e:79:c8:30\",\r\n        \"fixed_ips\": [\r\n            {\r\n                \"subnet_id\": \"6c480943-b1e9-4b52-8048-8bf1df550503\",\r\n                \"ip_address\": \"10.10.8.1\"\r\n            }\r\n        ],\r\n        \"id\": \"490f1e4f-5a60-4df9-88b1-953deebdf139\",\r\n        \"security_groups\": [\r\n            \"bda5122c-81bc-4dc5-b353-2d349c3e2063\"\r\n        ],\r\n        \"device_id\": \"8ae928f5-238e-4b67-9861-eca74312d897\"\r\n    }\r\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "325c4115-8d07-4871-a7ef-5d419001e5b3",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "de2b7ac7-795c-4709-af9f-e572aa814e6b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "bde1fac5-7dae-42c1-bab3-9cb3dead3bfc",
+			"key": "identityService",
+			"value": "identity.tyo1.conoha.io",
+			"type": "string"
+		},
+		{
+			"id": "60741827-79bc-44c7-82ee-9a9e5b7ca628",
+			"key": "networkAPI",
+			"value": "networking.tyo1.conoha.io",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

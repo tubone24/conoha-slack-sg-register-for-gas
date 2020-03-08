@@ -2,11 +2,45 @@ export class ConoHaService {
   private readonly token: string;
   private readonly networkDomain: string;
   private readonly securityGroupId: string;
-  constructor(token: string, networkDomain: string, securityGroupId: string) {
-    this.token = token;
+  constructor(
+    username: string,
+    password: string,
+    tenantId: string,
+    identityDomain: string,
+    networkDomain: string,
+    securityGroupId: string
+  ) {
     this.networkDomain = networkDomain;
     this.securityGroupId = securityGroupId;
+    this.token = ConoHaService.issueToken(identityDomain, username, password, tenantId);
   }
+
+  static issueToken(
+    identityDomain: string,
+    username: string,
+    password: string,
+    tenantId: string
+  ): string {
+    const url = 'https://' + identityDomain + '/v2.0/tokens';
+    const payload = {
+      auth: {
+        passwordCredentials: {
+          username: username,
+          password: password
+        },
+        tenantId: tenantId
+      }
+    };
+    const options = {
+      method: 'post',
+      contentType: 'application/json',
+      payload: JSON.stringify(payload)
+    };
+    // @ts-ignore
+    const json = UrlFetchApp.fetch(url, options).getContentText();
+    return JSON.parse(json).access.token.id;
+  }
+
   getTargetSecurityGroupInfo(): JSON {
     const url = 'https://' + this.networkDomain + '/v2.0/security-groups/' + this.securityGroupId;
     const headers = { 'X-Auth-Token': this.token };
