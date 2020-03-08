@@ -81,7 +81,7 @@ global.doPost = (e: DoPostEvent) => {
     return response.createResponseText(responseText);
   }
 
-  if (!Utils.varidateIP(params.text)) {
+  if (!Utils.validateIP(params.text)) {
     return response.createResponseText('Enter v4 IP address format');
   }
 
