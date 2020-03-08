@@ -1,5 +1,5 @@
 // @ts-ignore
-import AWS = require("aws-sdk");
+import AWS = require('aws-sdk');
 // @ts-ignore
 import EC2 = require('aws-sdk/clients/ec2');
 AWS.config.loadFromPath('../credencials.json');
@@ -14,7 +14,7 @@ class Ec2Service {
 
   async registYourIp(sgName: string, ipAddress: string) {
     const sgList = await this.getSecurityGroups(sgName);
-    await this.setSgIpPermission(sgList, ipAddress, 22, "tcp")
+    await this.setSgIpPermission(sgList, ipAddress, 22, 'tcp');
   }
 
   private async getSecurityGroups(sgName: string): EC2.SecurityGroupList {
