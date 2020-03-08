@@ -181,7 +181,7 @@ clasp push
 
 Run `main` function , send Slack your web page screenshot.
 
-![Img](docs/images/slack-preview.png)
+![Img](docs/images/demo.gif)
 
 ## Contributing
 
