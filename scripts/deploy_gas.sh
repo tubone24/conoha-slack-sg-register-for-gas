@@ -2,3 +2,4 @@
 # Usage:
 # ./deploy_gas.sh
 npx @google/clasp push -f
+npx @google/clasp deploy

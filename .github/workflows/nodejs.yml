@@ -17,10 +17,13 @@ jobs:
         with:
           node-version: 10.x
       - name: npm install, build, and test
-        run: |
+        - run: |
           npm install
           npm run build
           npm test
+         - uses: coverallsapp/github-action@master
+           with:
+             github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: push to GAS
         run: |
           echo "${{ secrets.CLASPRC_JSON }}" > ~/.clasprc.json
