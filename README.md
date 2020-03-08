@@ -2,7 +2,7 @@
 
 ![logo](docs/images/logo.png)
 
-![Node CI](https://github.com/tubone24/conoha-slack-sg-register-for-gas/workflows/Node%20CI/badge.svg?branch=master)
+[![Node CI](https://github.com/tubone24/conoha-slack-sg-register-for-gas/workflows/Node%20CI/badge.svg?branch=master)](https://github.com/tubone24/conoha-slack-sg-register-for-gas/actions)
 [![license](https://img.shields.io/github/license/tubone24/conoha-slack-sg-register-for-gas.svg)](LICENSE)
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
@@ -15,6 +15,7 @@
 - [Install](#install)
 - [Usage](#usage)
 - [Demos](#demos)
+- [Test](#Test)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -189,6 +190,8 @@ Open your script deployed, click `tool bar => publish => deploy as web app`
 And check `Current web app URL`, this is Slack outgoing request URL!
 
 ![img](docs/images/8.png)
+
+**GitHub Actions also deploying as web apps!**
 
 ## Demos
 
