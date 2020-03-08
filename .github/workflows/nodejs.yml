@@ -16,15 +16,15 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 10.x
-      - name: Use Coveralls
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: npm install, build, and test
         run: |
           npm install
           npm run build
           npm test
+      - name: Use Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: push to GAS
         run: |
           echo "${{ secrets.CLASPRC_JSON }}" > ~/.clasprc.json
