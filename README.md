@@ -1,4 +1,6 @@
-# conoHa-SG-opener-gas
+# conoHa SG IP Register for GAS & Slack
+
+![logo](docs/images/logo.png)
 
 [![license](https://img.shields.io/github/license/tubone24/conoha-slack-sg-register-for-gas.svg)](LICENSE)
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
