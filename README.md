@@ -2,6 +2,7 @@
 
 ![logo](docs/images/logo.png)
 
+![Node CI](https://github.com/tubone24/conoha-slack-sg-register-for-gas/workflows/Node%20CI/badge.svg?branch=master)
 [![license](https://img.shields.io/github/license/tubone24/conoha-slack-sg-register-for-gas.svg)](LICENSE)
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
@@ -194,6 +195,54 @@ And check `Current web app URL`, this is Slack outgoing request URL!
 Run `main` function , send Slack your web page screenshot.
 
 ![Img](docs/images/demo.gif)
+
+## Test
+
+If you modify this codes, run unit test with `jest`.
+
+```
+npm test
+```
+
+Also, this repo is integrated with GitHub Action.
+
+So, Run CI test, if you write test.
+
+### GitHub Action
+
+This repo use GitHub Action, Run tests, Build scripts and push scripts to GAS triggered by push to master branch.
+
+If you want to upload script with GitHub Action, you will set your `.clasprc.json` on GitHub Action SECRET.
+
+#### How to setup your clasprc.json
+
+Before set your clasprc.json, run clasp login with your local PC.
+
+```
+clasp login
+```
+
+And you open ~/.clasprc.json with editor.
+
+```
+# If you use VSCode
+code ~/.clasprc.json
+```
+
+![Img](docs/images/clasp1.png)
+
+Copy it and paste another window, and replace `"` character to `\"` because of reading to one-line string on bash command.
+
+![Img](docs/images/clasp2.png)
+
+Copy it and paste your GitHub Action Secret (https://github.com/{your_name}/{your_repo}/settings/secrets)
+
+Sectet name is `CLASPRC_JSON` and paste your clasprc.json.
+
+![Image](docs/images/clasp3.png)
+
+Congratulation! You can deploy to GitHub Action!
+
 
 ## Contributing
 
