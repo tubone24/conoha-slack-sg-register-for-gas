@@ -177,6 +177,16 @@ clasp login  # only first access
 clasp push
 ```
 
+## Deploy as web app
+
+And also, deploy as web app for the script.
+
+Open your script deployed, click `tool bar => publish => deploy as web app`
+
+And check `Current web app URL`, this is Slack outgoing request URL!
+
+![img](docs/images/8.png)
+
 ## Demos
 
 Run `main` function , send Slack your web page screenshot.
