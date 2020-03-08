@@ -3,6 +3,7 @@
 ![logo](docs/images/logo.png)
 
 [![Node CI](https://github.com/tubone24/conoha-slack-sg-register-for-gas/workflows/Node%20CI/badge.svg?branch=master)](https://github.com/tubone24/conoha-slack-sg-register-for-gas/actions)
+[![Coverage Status](https://coveralls.io/repos/github/tubone24/conoha-slack-sg-register-for-gas/badge.svg?branch=master)](https://coveralls.io/github/tubone24/conoha-slack-sg-register-for-gas?branch=master)
 [![license](https://img.shields.io/github/license/tubone24/conoha-slack-sg-register-for-gas.svg)](LICENSE)
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
