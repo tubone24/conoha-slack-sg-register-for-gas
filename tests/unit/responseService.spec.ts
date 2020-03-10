@@ -17,3 +17,24 @@ describe('constructor', () => {
   });
 });
 
+describe('createResponseText', () => {
+  it('ok', () => {
+    const mockCreateTextOutput = jest.fn(() => {
+      return {
+        setMimeType: jest.fn(() => {
+          return '{"text": "<@ testUserId> testText"}';
+        })
+      };
+    });
+    // @ts-ignore
+    ContentService.createTextOutput = mockCreateTextOutput;
+    // @ts-ignore
+    ContentService.MimeType= {};
+    // @ts-ignore
+    ContentService.MimeType.JSON = {};
+    const responseService = new ResponseService('testUserId');
+    const actual = responseService.createResponseText('testText');
+    expect(actual).toBe('{"text": "<@ testUserId> testText"}')
+  });
+});
+
