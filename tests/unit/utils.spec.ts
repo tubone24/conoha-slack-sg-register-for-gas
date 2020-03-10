@@ -44,6 +44,17 @@ describe('usageCommand', () => {
   });
 });
 
+describe('billingCommand', () => {
+  it('OK', () => {
+    const actual = Utils.billingCommand('billing');
+    expect(actual).toBe(true);
+  });
+  it('NG', () => {
+    const actual = Utils.billingCommand('test');
+    expect(actual).toBe(false);
+  });
+});
+
 describe('prettyJSON', () => {
   it('OK', () => {
     const jsonData = {"test": "test"};

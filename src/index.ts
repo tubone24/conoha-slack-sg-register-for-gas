@@ -23,6 +23,9 @@ global.doPost = (e: DoPostEvent) => {
   const CONOHA_IDENTITY_ENDPOINT: string = PropertiesService.getScriptProperties().getProperty(
     'CONOHA_IDENTITY_ENDPOINT'
   );
+  const CONOHA_ACCOUNT_ENDPOINT: string = PropertiesService.getScriptProperties().getProperty(
+    'CONOHA_ACCOUNT_ENDPOINT'
+  );
   const CONOHA_TENANTID: string = PropertiesService.getScriptProperties().getProperty(
     'CONOHA_TENANTID'
   );
@@ -55,8 +58,13 @@ global.doPost = (e: DoPostEvent) => {
     CONOHA_TENANTID,
     CONOHA_IDENTITY_ENDPOINT,
     CONOHA_NETWORK_ENDPOINT,
+    CONOHA_ACCOUNT_ENDPOINT,
     CONOHA_TARGET_SG
   );
+
+  if (Utils.billingCommand(params.text)) {
+    ConoHaHelper.extractLatestAccountBillPlusTax(conohaService.getAccountInfo())
+  }
 
   if (Utils.showCommand(params.text)) {
     let responseText = 'Show All Rules...\n```';

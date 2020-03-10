@@ -23,6 +23,7 @@ describe('constructor', () => {
       'testTenantId',
       'testIdentityDomain',
       'testNetworkDoman',
+      'testAccountDomain',
       'testSecurityGroupId');
     expect(mockFetch.mock.calls[0]).toEqual(expected);
     const token = (actual as any).token;
@@ -57,6 +58,39 @@ describe('issueToken', () => {
   });
 });
 
+describe('getAccountInfo', () => {
+  it('getAccountInfo', () => {
+    const mockFetch = jest.fn(() => {
+      return {
+        getContentText: jest.fn(() => {
+          return '{"access": {"token": {"id": "testToken"}}, "billing_invoices": [{"bill_plus_tax": "500"}]}';
+        })
+      };
+    });
+    // @ts-ignore
+    UrlFetchApp.fetch = mockFetch;
+    const target = new ConoHaService(
+      'testUser',
+      'testPassword',
+      'testTenantId',
+      'testIdentityDomain',
+      'testNetworkDoman',
+      'testAccountDomain',
+      'testSecurityGroupId');
+    const actual = target.getAccountInfo();
+    const url = 'https://testAccountDomain/v1/testTenantId/billing-invoices';
+    const headers = { 'X-Auth-Token': 'testToken' };
+    const option = {
+      'method': 'get',
+      'contentType': 'application/json',
+      'headers': headers};
+    const expected = [url, option];
+    expect(mockFetch.mock.calls[1]).toEqual(expected);
+    // @ts-ignore
+    expect(actual.billing_invoices[0].bill_plus_tax).toBe('500')
+  });
+});
+
 describe('getTargetSecurityGroupInfo', () => {
   it('getTargetSecurityGroupInfo', () => {
     const mockFetch = jest.fn(() => {
@@ -74,6 +108,7 @@ describe('getTargetSecurityGroupInfo', () => {
       'testTenantId',
       'testIdentityDomain',
       'testNetworkDoman',
+      'testAccountDomain',
       'testSecurityGroupId');
     const actual = target.getTargetSecurityGroupInfo();
     const url = 'https://testNetworkDoman/v2.0/security-groups/testSecurityGroupId';
@@ -106,6 +141,7 @@ describe('addIpToTargetSg', () => {
       'testTenantId',
       'testIdentityDomain',
       'testNetworkDoman',
+      'testAccountDomain',
       'testSecurityGroupId');
     const actual = target.addIpToTargetSg('192.168.0.1', 'tcp', '22');
     const url = 'https://testNetworkDoman/v2.0/security-group-rules';
@@ -153,6 +189,7 @@ describe('revokeIpToTargetSg', () => {
       'testTenantId',
       'testIdentityDomain',
       'testNetworkDoman',
+      'testAccountDomain',
       'testSecurityGroupId');
     const actual = target.revokeIpToTargetSg('testSecurityGroupId');
     const url = 'https://testNetworkDoman/v2.0/security-group-rules/testSecurityGroupId';
@@ -186,6 +223,7 @@ describe('revokeIpToTargetSg', () => {
       'testTenantId',
       'testIdentityDomain',
       'testNetworkDoman',
+      'testAccountDomain',
       'testSecurityGroupId');
     const actual = target.revokeIpToTargetSg('testSecurityGroupId');
     const url = 'https://testNetworkDoman/v2.0/security-group-rules/testSecurityGroupId';

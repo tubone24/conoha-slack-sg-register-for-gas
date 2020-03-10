@@ -2,16 +2,21 @@ export class ConoHaService {
   private readonly token: string;
   private readonly networkDomain: string;
   private readonly securityGroupId: string;
+  private readonly accountDomain: string;
+  private readonly tenantId: string;
   constructor(
     username: string,
     password: string,
     tenantId: string,
     identityDomain: string,
     networkDomain: string,
+    accountDomain: string,
     securityGroupId: string
   ) {
     this.networkDomain = networkDomain;
+    this.accountDomain = accountDomain;
     this.securityGroupId = securityGroupId;
+    this.tenantId = tenantId;
     this.token = ConoHaService.issueToken(identityDomain, username, password, tenantId);
   }
 
@@ -90,5 +95,18 @@ export class ConoHaService {
     // @ts-ignore
     const code = UrlFetchApp.fetch(url, options).getResponseCode();
     return code == 204;
+  }
+
+  getAccountInfo() {
+    const url = 'https://' + this.accountDomain + '/v1/' + this.tenantId + '/billing-invoices';
+    const headers = { 'X-Auth-Token': this.token };
+    const options = {
+      method: 'get',
+      contentType: 'application/json',
+      headers: headers
+    };
+    // @ts-ignore
+    const json = UrlFetchApp.fetch(url, options).getContentText();
+    return JSON.parse(json);
   }
 }

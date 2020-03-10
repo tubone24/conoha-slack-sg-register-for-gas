@@ -60,3 +60,18 @@ describe('extractIngressSgRules', () => {
     expect(actual).toEqual([]);
   });
 });
+
+describe('extractLatestAccountBillPlusTax', () => {
+  it('ok', () => {
+    const formatDate = jest.fn(() => {
+      return '2020/4/19';
+    });
+    // @ts-ignore
+    Utilities.formatDate = formatDate;
+    const input = {billing_invoices: [
+        {bill_plus_tax: 500, due_date: '2020-04-19T15:00:00Z'}
+      ]};
+    const actual = ConoHaHelper.extractLatestAccountBillPlusTax(input);
+    expect(actual).toBe('Now Billing: 500YEN\n  Due Date: 2020/4/19');
+  });
+});
