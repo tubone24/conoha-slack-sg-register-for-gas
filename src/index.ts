@@ -63,7 +63,7 @@ global.doPost = (e: DoPostEvent) => {
   );
 
   if (Utils.billingCommand(params.text)) {
-    ConoHaHelper.extractLatestAccountBillPlusTax(conohaService.getAccountInfo())
+    return response.createResponseText(ConoHaHelper.extractLatestAccountBillPlusTax(conohaService.getAccountInfo()));
   }
 
   if (Utils.showCommand(params.text)) {
