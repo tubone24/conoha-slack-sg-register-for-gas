@@ -29,6 +29,6 @@ jobs:
         run: |
           echo "${{ secrets.CLASPRC_JSON }}" > ~/.clasprc.json
           chmod +x scripts/deploy_gas.sh
-          scripts/deploy_gas.sh
+          scripts/deploy_gas.sh ${{ secrets.DEPLOY_ID }}
         env:
           CI: true
