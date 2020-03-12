@@ -3,22 +3,23 @@ import { SlackService } from './slackService';
 import { ResponseService } from './responseService';
 import { ConoHaService } from './conoHaService';
 import { ConoHaHelper } from './conoHaHelper';
-import { GetScriptPropertiesService } from "./getScriptPropertiesService";
+import { GetScriptPropertiesService, Property } from "./getScriptPropertiesService";
 import { Utils } from './utils';
 
 declare var global: any;
 
 global.doPost = (e: DoPostEvent) => {
   console.log(JSON.stringify(e));
-  const VERIFY_TOKEN: string = GetScriptPropertiesService.getProperties().verifyToken;
-  const CHANNEL_ID: string =  GetScriptPropertiesService.getProperties().channelId;
-  const CONOHA_NETWORK_ENDPOINT: string = GetScriptPropertiesService.getProperties().conohaNetworkEndpoint;
-  const CONOHA_USERNAME: string = GetScriptPropertiesService.getProperties().conohaUsername;
-  const CONOHA_PASSWORD: string = GetScriptPropertiesService.getProperties().conohaPassword;
-  const CONOHA_IDENTITY_ENDPOINT: string = GetScriptPropertiesService.getProperties().conohaIdentityEndpoint;
-  const CONOHA_ACCOUNT_ENDPOINT: string = GetScriptPropertiesService.getProperties().conohaAccountEndpoint;
-  const CONOHA_TENANTID: string = GetScriptPropertiesService.getProperties().conohaTenantId;
-  const CONOHA_TARGET_SG: string = GetScriptPropertiesService.getProperties().conohaTargetSg;
+  const config: Property = GetScriptPropertiesService.getProperties();
+  const VERIFY_TOKEN: string = config.verifyToken;
+  const CHANNEL_ID: string =  config.channelId;
+  const CONOHA_NETWORK_ENDPOINT: string = config.conohaNetworkEndpoint;
+  const CONOHA_USERNAME: string = config.conohaUsername;
+  const CONOHA_PASSWORD: string = config.conohaPassword;
+  const CONOHA_IDENTITY_ENDPOINT: string = config.conohaIdentityEndpoint;
+  const CONOHA_ACCOUNT_ENDPOINT: string = config.conohaAccountEndpoint;
+  const CONOHA_TENANTID: string = config.conohaTenantId;
+  const CONOHA_TARGET_SG: string = config.conohaTargetSg;
 
   const params = GetParamService.getParams(e);
   const response = new ResponseService(params.userId);

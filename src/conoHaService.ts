@@ -46,7 +46,7 @@ export class ConoHaService {
     return JSON.parse(json).access.token.id;
   }
 
-  getTargetSecurityGroupInfo(): JSON {
+  getTargetSecurityGroupInfo(): SecurityGroupDetail {
     const url = 'https://' + this.networkDomain + '/v2.0/security-groups/' + this.securityGroupId;
     const headers = { 'X-Auth-Token': this.token };
     const options = {
@@ -58,7 +58,7 @@ export class ConoHaService {
     const json = UrlFetchApp.fetch(url, options).getContentText();
     return JSON.parse(json);
   }
-  addIpToTargetSg(ipAddress: string, protocol: string, port: string) {
+  addIpToTargetSg(ipAddress: string, protocol: string, port: string): SecurityGroupRuleDetail {
     const url = 'https://' + this.networkDomain + '/v2.0/security-group-rules';
     const ipPrefix = ipAddress + '/32';
     const headers = { 'X-Auth-Token': this.token };
@@ -84,7 +84,7 @@ export class ConoHaService {
     const json = UrlFetchApp.fetch(url, options).getContentText();
     return JSON.parse(json);
   }
-  revokeIpToTargetSg(id: string) {
+  revokeIpToTargetSg(id: string): boolean {
     const url = 'https://' + this.networkDomain + '/v2.0/security-group-rules/' + id;
     const headers = { 'X-Auth-Token': this.token };
     const options = {
@@ -97,7 +97,7 @@ export class ConoHaService {
     return code == 204;
   }
 
-  getAccountInfo() {
+  getAccountInfo(): BillingInvoices {
     const url = 'https://' + this.accountDomain + '/v1/' + this.tenantId + '/billing-invoices';
     const headers = { 'X-Auth-Token': this.token };
     const options = {
@@ -109,4 +109,46 @@ export class ConoHaService {
     const json = UrlFetchApp.fetch(url, options).getContentText();
     return JSON.parse(json);
   }
+}
+
+export interface SecurityGroups {
+  security_groups: SecurityGroupDetail[]
+}
+
+export interface SecurityGroupDetail {
+  security_group: {
+    tenant_id: string,
+    description: string,
+    id: string,
+    security_group_rules: SecurityGroupRule[]
+  }
+}
+
+export interface SecurityGroupRuleDetail {
+  security_group_rule: SecurityGroupRule
+}
+
+export interface SecurityGroupRule {
+  remote_group_id: string | null,
+  remote_ip_prefix: string | null,
+  direction: string,
+  protocol: string | null,
+  ethertype: string,
+  tenant_id: string,
+  port_range_max: number | null,
+  port_range_min: number | null,
+  id: string,
+  security_group_id: string
+}
+
+export interface BillingInvoices {
+  billing_invoices: BillingInvoice[]
+}
+
+export interface BillingInvoice {
+  invoice_id: number,
+  payment_method_type: string,
+  invoice_date: string,
+  bill_plus_tax: number,
+  due_date: string
 }

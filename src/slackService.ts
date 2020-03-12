@@ -3,7 +3,7 @@ export class SlackService {
     return targetToken == correctToken;
   };
 
-  static verifyChannel = (targetChannel, correctChannel) => {
+  static verifyChannel = (targetChannel, correctChannel): boolean => {
     return targetChannel == correctChannel;
   };
 }

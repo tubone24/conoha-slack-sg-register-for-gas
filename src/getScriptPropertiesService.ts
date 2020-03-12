@@ -1,5 +1,5 @@
 export class GetScriptPropertiesService {
-  static getProperties() {
+  static getProperties(): Property {
     const verifyToken: string = PropertiesService.getScriptProperties().getProperty('VERIFY_TOKEN');
     const channelId: string = PropertiesService.getScriptProperties().getProperty('CHANNEL_ID');
     const conohaNetworkEndpoint: string = PropertiesService.getScriptProperties().getProperty(
@@ -35,4 +35,16 @@ export class GetScriptPropertiesService {
       conohaTargetSg: conohaTargetSg
     }
   }
+}
+
+export interface Property {
+  verifyToken: string,
+  channelId: string,
+  conohaNetworkEndpoint: string,
+  conohaUsername: string,
+  conohaPassword: string,
+  conohaIdentityEndpoint: string,
+  conohaAccountEndpoint: string,
+  conohaTenantId: string,
+  conohaTargetSg: string
 }
