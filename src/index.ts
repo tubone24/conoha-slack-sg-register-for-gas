@@ -3,7 +3,7 @@ import { SlackService } from './slackService';
 import { ResponseService } from './responseService';
 import { ConoHaService } from './conoHaService';
 import { ConoHaHelper } from './conoHaHelper';
-import { GetScriptPropertiesService, Property } from "./getScriptPropertiesService";
+import { GetScriptPropertiesService, Property } from './getScriptPropertiesService';
 import { Utils } from './utils';
 
 declare var global: any;
@@ -12,7 +12,7 @@ global.doPost = (e: DoPostEvent) => {
   console.log(JSON.stringify(e));
   const config: Property = GetScriptPropertiesService.getProperties();
   const VERIFY_TOKEN: string = config.verifyToken;
-  const CHANNEL_ID: string =  config.channelId;
+  const CHANNEL_ID: string = config.channelId;
   const CONOHA_NETWORK_ENDPOINT: string = config.conohaNetworkEndpoint;
   const CONOHA_USERNAME: string = config.conohaUsername;
   const CONOHA_PASSWORD: string = config.conohaPassword;
@@ -51,7 +51,9 @@ global.doPost = (e: DoPostEvent) => {
   );
 
   if (Utils.billingCommand(params.text)) {
-    return response.createResponseText(ConoHaHelper.extractLatestAccountBillPlusTax(conohaService.getAccountInfo()));
+    return response.createResponseText(
+      ConoHaHelper.extractLatestAccountBillPlusTax(conohaService.getAccountInfo())
+    );
   }
 
   if (Utils.showCommand(params.text)) {

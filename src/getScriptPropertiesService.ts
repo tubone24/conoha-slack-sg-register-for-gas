@@ -33,18 +33,18 @@ export class GetScriptPropertiesService {
       conohaAccountEndpoint: conohaAccountEndpoint,
       conohaTenantId: conohaTenantId,
       conohaTargetSg: conohaTargetSg
-    }
+    };
   }
 }
 
 export interface Property {
-  verifyToken: string,
-  channelId: string,
-  conohaNetworkEndpoint: string,
-  conohaUsername: string,
-  conohaPassword: string,
-  conohaIdentityEndpoint: string,
-  conohaAccountEndpoint: string,
-  conohaTenantId: string,
-  conohaTargetSg: string
+  verifyToken: string;
+  channelId: string;
+  conohaNetworkEndpoint: string;
+  conohaUsername: string;
+  conohaPassword: string;
+  conohaIdentityEndpoint: string;
+  conohaAccountEndpoint: string;
+  conohaTenantId: string;
+  conohaTargetSg: string;
 }

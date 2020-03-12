@@ -112,43 +112,43 @@ export class ConoHaService {
 }
 
 export interface SecurityGroups {
-  security_groups: SecurityGroupDetail[]
+  security_groups: SecurityGroupDetail[];
 }
 
 export interface SecurityGroupDetail {
   security_group: {
-    tenant_id: string,
-    description: string,
-    id: string,
-    security_group_rules: SecurityGroupRule[]
-  }
+    tenant_id: string;
+    description: string;
+    id: string;
+    security_group_rules: SecurityGroupRule[];
+  };
 }
 
 export interface SecurityGroupRuleDetail {
-  security_group_rule: SecurityGroupRule
+  security_group_rule: SecurityGroupRule;
 }
 
 export interface SecurityGroupRule {
-  remote_group_id: string | null,
-  remote_ip_prefix: string | null,
-  direction: string,
-  protocol: string | null,
-  ethertype: string,
-  tenant_id: string,
-  port_range_max: number | null,
-  port_range_min: number | null,
-  id: string,
-  security_group_id: string
+  remote_group_id: string | null;
+  remote_ip_prefix: string | null;
+  direction: string;
+  protocol: string | null;
+  ethertype: string;
+  tenant_id: string;
+  port_range_max: number | null;
+  port_range_min: number | null;
+  id: string;
+  security_group_id: string;
 }
 
 export interface BillingInvoices {
-  billing_invoices: BillingInvoice[]
+  billing_invoices: BillingInvoice[];
 }
 
 export interface BillingInvoice {
-  invoice_id: number,
-  payment_method_type: string,
-  invoice_date: string,
-  bill_plus_tax: number,
-  due_date: string
+  invoice_id: number;
+  payment_method_type: string;
+  invoice_date: string;
+  bill_plus_tax: number;
+  due_date: string;
 }
