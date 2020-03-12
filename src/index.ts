@@ -3,35 +3,22 @@ import { SlackService } from './slackService';
 import { ResponseService } from './responseService';
 import { ConoHaService } from './conoHaService';
 import { ConoHaHelper } from './conoHaHelper';
+import { GetScriptPropertiesService } from "./getScriptPropertiesService";
 import { Utils } from './utils';
 
 declare var global: any;
 
 global.doPost = (e: DoPostEvent) => {
   console.log(JSON.stringify(e));
-  const VERIFY_TOKEN: string = PropertiesService.getScriptProperties().getProperty('VERIFY_TOKEN');
-  const CHANNEL_ID: string = PropertiesService.getScriptProperties().getProperty('CHANNEL_ID');
-  const CONOHA_NETWORK_ENDPOINT: string = PropertiesService.getScriptProperties().getProperty(
-    'CONOHA_NETWORK_ENDPOINT'
-  );
-  const CONOHA_USERNAME: string = PropertiesService.getScriptProperties().getProperty(
-    'CONOHA_USERNAME'
-  );
-  const CONOHA_PASSWORD: string = PropertiesService.getScriptProperties().getProperty(
-    'CONOHA_PASSWORD'
-  );
-  const CONOHA_IDENTITY_ENDPOINT: string = PropertiesService.getScriptProperties().getProperty(
-    'CONOHA_IDENTITY_ENDPOINT'
-  );
-  const CONOHA_ACCOUNT_ENDPOINT: string = PropertiesService.getScriptProperties().getProperty(
-    'CONOHA_ACCOUNT_ENDPOINT'
-  );
-  const CONOHA_TENANTID: string = PropertiesService.getScriptProperties().getProperty(
-    'CONOHA_TENANTID'
-  );
-  const CONOHA_TARGET_SG: string = PropertiesService.getScriptProperties().getProperty(
-    'CONOHA_TARGET_SG'
-  );
+  const VERIFY_TOKEN: string = GetScriptPropertiesService.getProperties().verifyToken;
+  const CHANNEL_ID: string =  GetScriptPropertiesService.getProperties().channelId;
+  const CONOHA_NETWORK_ENDPOINT: string = GetScriptPropertiesService.getProperties().conohaNetworkEndpoint;
+  const CONOHA_USERNAME: string = GetScriptPropertiesService.getProperties().conohaUsername;
+  const CONOHA_PASSWORD: string = GetScriptPropertiesService.getProperties().conohaPassword;
+  const CONOHA_IDENTITY_ENDPOINT: string = GetScriptPropertiesService.getProperties().conohaIdentityEndpoint;
+  const CONOHA_ACCOUNT_ENDPOINT: string = GetScriptPropertiesService.getProperties().conohaAccountEndpoint;
+  const CONOHA_TENANTID: string = GetScriptPropertiesService.getProperties().conohaTenantId;
+  const CONOHA_TARGET_SG: string = GetScriptPropertiesService.getProperties().conohaTargetSg;
 
   const params = GetParamService.getParams(e);
   const response = new ResponseService(params.userId);
